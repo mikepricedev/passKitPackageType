@@ -1,4 +1,4 @@
-declare module "passKitPackageFormatV1" {
+declare module "passkitpackagev1" {
 
 	export type TdataDetector = "PKDataDetectorTypePhoneNumber" | "PKDataDetectorTypeLink" | "PKDataDetectorTypeAddress" | "PKDataDetectorTypeCalendarEvent";
 

@@ -1,7 +1,7 @@
 {
-  "name": "pass-kit-package-format",
-  "version": "0.0.1",
-  "description": "Typings for PassKit Packages.",
+  "name": "passkitpackagev1",
+  "version": "1.0.0",
+  "description": "Typings for PassKit Packages version 1.",
   "types": "index.d.ts",
   "peerDependencies": {
     "typescript": "^2.0.0"
