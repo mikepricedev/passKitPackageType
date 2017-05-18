@@ -4,7 +4,7 @@ declare module "passkitpackagev1" {
 
 	export type TtextAlignment = "PKTextAlignmentLeft" | "PKTextAlignmentCenter" | "PKTextAlignmentRight" | "PKTextAlignmentNatural";
 
-	export interface standardFieldDictionary {
+	export interface IstandardFieldDictionary {
 		attributedValue?:string | number;
 		changeMessage?:string;
 		dataDetectorTypes?:TdataDetector[];
@@ -16,7 +16,7 @@ declare module "passkitpackagev1" {
 
 	export type TdateStyle = "PKDateStyleNone" | "PKDateStyleShort" | "PKDateStyleMedium" | "PKDateStyleLong" | "PKDateStyleFull";
 
-	export interface dateFieldDictionary extends standardFieldDictionary {
+	export interface IdateFieldDictionary extends IstandardFieldDictionary {
 		dateStyle:TdateStyle;
 		ignoresTimeZone?:boolean;
 		isRelative?:boolean;
@@ -25,42 +25,42 @@ declare module "passkitpackagev1" {
 
 	export type TnumberStyle = "PKNumberStyleDecimal" | "PKNumberStylePercent" | "PKNumberStyleScientific" | "PKNumberStyleSpellOut";
 
-	export interface numberFieldDictionary extends standardFieldDictionary {
+	export interface InumberFieldDictionary extends IstandardFieldDictionary {
 		numberStyle:TnumberStyle;
 	}
 
 
-	export type TfieldDictionaries = standardFieldDictionary | dateFieldDictionary | numberFieldDictionary;
+	export type IfieldDictionaries = IstandardFieldDictionary | IdateFieldDictionary | InumberFieldDictionary;
 
-	export type TupTo2fieldDictionaries = [TfieldDictionaries] | [TfieldDictionaries, TfieldDictionaries];
-	export type TupTo3fieldDictionaries = TupTo2fieldDictionaries | [TfieldDictionaries, TfieldDictionaries, TfieldDictionaries];
-	export type TupTo4fieldDictionaries = TupTo3fieldDictionaries | [TfieldDictionaries, TfieldDictionaries, TfieldDictionaries, TfieldDictionaries];
-	export type TupTo5fieldDictionaries = TupTo4fieldDictionaries | [TfieldDictionaries, TfieldDictionaries, TfieldDictionaries, TfieldDictionaries, TfieldDictionaries];
+	export type TupTo2fieldDictionaries = [IfieldDictionaries] | [IfieldDictionaries, IfieldDictionaries];
+	export type TupTo3fieldDictionaries = TupTo2fieldDictionaries | [IfieldDictionaries, IfieldDictionaries, IfieldDictionaries];
+	export type TupTo4fieldDictionaries = TupTo3fieldDictionaries | [IfieldDictionaries, IfieldDictionaries, IfieldDictionaries, IfieldDictionaries];
+	export type TupTo5fieldDictionaries = TupTo4fieldDictionaries | [IfieldDictionaries, IfieldDictionaries, IfieldDictionaries, IfieldDictionaries, IfieldDictionaries];
 
-	export interface passStructureDictionary {
+	export interface IpassStructureDictionary {
 		auxiliaryFields?:TupTo4fieldDictionaries;
-		backFields?:TfieldDictionaries[];
+		backFields?:IfieldDictionaries[];
 		headerFields?:TupTo3fieldDictionaries;
-		primaryFields?:[TfieldDictionaries];
+		primaryFields?:[IfieldDictionaries];
 		secondaryFields?:TupTo4fieldDictionaries;
 	}
 
 	export type TtransitType = "PKTransitTypeAir" |  "PKTransitTypeBoat" |  "PKTransitTypeBus" |  "PKTransitTypeGeneric" | "PKTransitTypeTrain";
 	
-	export interface boardingPassStructureDictionary extends passStructureDictionary {
+	export interface IboardingPassStructureDictionary extends IpassStructureDictionary {
 		transitType:TtransitType;
 		primaryFields?:TupTo2fieldDictionaries;
 		auxiliaryFields?:TupTo5fieldDictionaries;
 	}
 
-	export interface beaconDictionary {
+	export interface IbeaconDictionary {
 		major?:number;
 		minor?:number;
 		proximityUUID:string;
 		relevantText?:string;
 	}
 
-	export interface locationDictionary {
+	export interface IlocationDictionary {
 		altitude?:number;
 		latitude:number;
 		longitude:number;
@@ -69,57 +69,57 @@ declare module "passkitpackagev1" {
 
 	export type TbarcodeFormat = "PKBarcodeFormatQR" | "PKBarcodeFormatPDF417" |  "PKBarcodeFormatAztec" | "PKBarcodeFormatCode128";
 
-	export interface barcodeDictionary {
+	export interface IbarcodeDictionary {
 		altText?:string;
 		format: TbarcodeFormat;
 		message:string;
 		messageEncoding:"iso-8859-1" | string;
 	}
 
-	export interface nfcDictionary {
+	export interface InfcDictionary {
 		message:string;
 		encryptionPublicKey?:string;
 	}
 
 	//Boarding Pass
-	export interface boardingPass extends unstylePassKitPackage {
-		boardingPass:boardingPassStructureDictionary;
+	export interface IboardingPass extends IunstylePassKitPackage {
+		IboardingPass:IboardingPassStructureDictionary;
 	}
-	export type serviceableBoardingPass = boardingPass & webService;
+	export type IserviceableBoardingPass = IboardingPass & IwebService;
 
 	//Coupon
-	export interface coupon extends unstylePassKitPackage {
-		coupon:passStructureDictionary;
+	export interface Icoupon extends IunstylePassKitPackage {
+		coupon:IpassStructureDictionary;
 	}
-	export type serviceableCoupon = coupon & webService;
+	export type IserviceableCoupon = Icoupon & IwebService;
 
 	//Event Ticket
-	export interface eventTicket extends unstylePassKitPackage {
-		eventTicket:passStructureDictionary;
+	export interface IeventTicket extends IunstylePassKitPackage {
+		eventTicket:IpassStructureDictionary;
 	}
-	export type serviceableEventTicket = eventTicket & webService;
+	export type IserviceableEventTicket = IeventTicket & IwebService;
 
 	//Generic
-	export interface generic extends unstylePassKitPackage {
-		generic:passStructureDictionary;
+	export interface Igeneric extends IunstylePassKitPackage {
+		generic:IpassStructureDictionary;
 	}
-	export type serviceableGeneric = generic & webService;
+	export type IserviceableGeneric = Igeneric & IwebService;
 
 	//Store Card
-	export interface storeCard extends unstylePassKitPackage {
-		storeCard:passStructureDictionary;
+	export interface IstoreCard extends IunstylePassKitPackage {
+		storeCard:IpassStructureDictionary;
 	}
-	export type serviceableStoreCard = storeCard & webService;
+	export type IserviceableStoreCard = IstoreCard & IwebService;
 	
 	
 	
-	export type TservicablePassStyles = serviceableBoardingPass | serviceableCoupon | serviceableEventTicket | serviceableGeneric | serviceableStoreCard;
+	export type IservicablePassStyles = IserviceableBoardingPass | IserviceableCoupon | IserviceableEventTicket | IserviceableGeneric | IserviceableStoreCard;
 	
-	export type TunservicablePassStyles = boardingPass | coupon | eventTicket | generic | storeCard;
+	export type IunservicablePassStyles = IboardingPass | Icoupon | IeventTicket | Igeneric | IstoreCard;
 
-	export type TpassStyles = TservicablePassStyles | TunservicablePassStyles;
+	export type TpassStyles = IservicablePassStyles | IunservicablePassStyles;
 
-	export interface unstylePassKitPackage {
+	export interface IunstylePassKitPackage {
 		
 		//Standard Keys
 		description:string;
@@ -141,14 +141,14 @@ declare module "passkitpackagev1" {
 		voided?:boolean;
 		
 		//Relevance Keys
-		beacons?:beaconDictionary[];
-		locations?:locationDictionary[];
+		beacons?:IbeaconDictionary[];
+		locations?:IlocationDictionary[];
 		maxDistance?:number;
 		relevantDate?:string;
 
 		//Visual Appearance Keys
-		barcode?:barcodeDictionary;
-		barcodes?:barcodeDictionary[];
+		barcode?:IbarcodeDictionary;
+		barcodes?:IbarcodeDictionary[];
 		backgroundColor?:string;
 		foregroundColor?:string;
 		groupingIdentifier?:string;
@@ -157,10 +157,10 @@ declare module "passkitpackagev1" {
 		suppressStripShine?:boolean;
 
 		//NFC-Enabled Pass Keys
-		nfc?:nfcDictionary;
+		nfc?:InfcDictionary;
 	}
 
-	interface webService {
+	interface IwebService {
 		
 		//Web Service Keys
 		authenticationToken:string;
